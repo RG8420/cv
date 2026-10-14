@@ -1,0 +1,194 @@
+\PassOptionsToPackage{unicode}{hyperref}
+% Academic CV skeleton following bamos/cv; all personal content retained.
+\documentclass[11pt,letterpaper,sans]{moderncv}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[top=0.65in,bottom=0.7in,left=0.7in,right=0.7in]{geometry}
+\usepackage{enumitem}
+\usepackage{etoolbox}
+\usepackage{needspace}
+\usepackage{ragged2e}
+\usepackage[unicode]{hyperref}
+\usepackage{lastpage}
+% Layout adapted from https://github.com/bamos/cv (ModernCV banking).
+\moderncvstyle{banking}
+\moderncvcolor{black}
+\definecolor{color2}{rgb}{0.25,0.25,0.25}
+\definecolor{linkcolor}{rgb}{0.17,0.44,0.51}
+\colorlet{firstnamecolor}{color1}
+\definecolor{cvsoft}{rgb}{0.25,0.25,0.25}
+\AtEndPreamble{\hypersetup{pdftitle={Rahul Golder: CV},pdfauthor={Rahul Golder},colorlinks=true,allcolors=linkcolor}}
+\nopagenumbers
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyfoot[C]{\small\textcolor{gray}{Page \thepage\ of \pageref*{LastPage}}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\emergencystretch}{2em}
+\newlength{\cvcontentindent}
+\setlength{\cvcontentindent}{0pt}
+\justifying
+\raggedbottom
+\frenchspacing
+\urlstyle{same}
+\setlist[itemize]{label=\textbullet,leftmargin=1.1em,itemsep=0.10em,topsep=0.15em,parsep=0pt}
+\newenvironment{cvbodyblock}{\par\begingroup}{\par\endgroup}
+\newcommand{\cvsection}[1]{\par\Needspace{3\baselineskip}\vspace{-0.3em}\section{#1}\vspace{-0.25em}}
+\newcommand{\cvcompactentry}[3]{%
+\par\Needspace{4\baselineskip}
+{\bfseries #1}\ifstrempty{#2}{}{\enspace{\small\textcolor{cvsoft}{(#2)}}}\par\nobreak
+{\small\justifying #3\par}\vspace{0.35em}}
+\newcommand{\cvfullname}{Rahul Golder}
+\newcommand{\cvemail}{rahulgolder8420@tamu.edu}
+\newcommand{\cvlinkedinurl}{https://www.linkedin.com/in/rahul-golder-49b13920a}
+\newcommand{\cvlinkedinlabel}{rahul-golder-49b13920a}
+\newcommand{\cvscholarurl}{https://scholar.google.com/citations?user=CX03tXEAAAAJ}
+\newcommand{\cvgithuburl}{https://github.com/RG8420}
+
+\name{Rahul}{Golder}
+
+% Keep featured project points on one full-width line; reject overflow at compile time.
+\newcommand{\cvprojectpoint}[1]{%
+\item\begingroup\setbox0=\hbox{#1}%
+\ifdim\wd0>\linewidth\PackageError{CV}{Project point exceeds one line}{Shorten the project point.}\fi
+\makebox[\linewidth][s]{#1}\endgroup}
+
+
+% Two justified lines per compact teaching/leadership bullet; no overflow permitted.
+\newcommand{\cvtwolinepoint}[2]{%
+\item\begingroup
+\setbox0=\hbox{#1}\ifdim\wd0>\linewidth\PackageError{CV}{Two-line point first line too long}{Shorten the first line.}\fi
+\setbox0=\hbox{#2}\ifdim\wd0>\linewidth\PackageError{CV}{Two-line point second line too long}{Shorten the second line.}\fi
+\noindent\makebox[\linewidth][s]{#1}\par\nobreak
+\noindent\makebox[\linewidth][s]{#2}\par\endgroup}
+
+
+\newcommand{\cvskillline}[1]{\par\begingroup\setbox0=\hbox{#1}%
+\ifdim\wd0>\linewidth\PackageError{CV}{Skills line exceeds available width}{Shorten the skills line.}\fi
+\makebox[\linewidth][s]{#1}\par\endgroup}
+% Verify the requested length before the final page is shipped.
+\newcount\cvshippedpages
+\AddToHook{shipout/after}{\global\advance\cvshippedpages by 1}
+\AddToHook{enddocument/afterlastpage}{\ifnum\cvshippedpages=2\relax\else\PackageError{CV}{CV must be exactly two pages}{Adjust vertical spacing.}\fi}
+
+\begin{document}
+\justifying
+\begin{center}
+{\fontsize{30}{36}\selectfont\cvfullname}\par
+\vspace{0.35em}
+{\small\href{mailto:\cvemail}{\cvemail}\enspace\textbar\enspace
+\href{\cvlinkedinurl}{LinkedIn}\enspace\textbar\enspace
+\href{\cvgithuburl}{github.com/RG8420}\enspace\textbar\enspace
+\href{\cvscholarurl}{Google Scholar}}\par
+\end{center}
+\vspace{-0.6em}
+
+\cvsection{EDUCATION}
+\begin{cvbodyblock}\small
+
+\textbf{Ph.D. in Chemical Engineering (in progress)}, \href{https://www.tamu.edu/}{Texas A\&M University} (Aug 2024--Present)\par
+\textit{Supervisor: Professor Faruque Hasan, Department of Chemical Engineering, Texas A\&M University.}\par
+\textbf{B.Tech. and M.Tech. in Chemical Engineering}, \href{https://www.iitkgp.ac.in/}{IIT Kharagpur} (July 2019--Apr 2024)
+\end{cvbodyblock}\vspace{0.20em}
+
+
+\cvsection{RESEARCH EXPERIENCE}
+\cvcompactentry{KKT-HardNet: Physics-Constrained Machine Learning with Differentiable Projection}{}{\begin{itemize}[label=\textbullet,leftmargin=1.1em]
+\cvprojectpoint{Developed \href{https://arxiv.org/abs/2507.08124}{KKT-HardNet}, a JAX framework projecting neural predictions onto nonlinear constraint manifolds.}
+\cvprojectpoint{Modeled \textbf{3-state} reactor control with \textbf{10-step} Lyapunov MPC; obtained \textbf{zero} sampled inequality violations.}
+\cvprojectpoint{Modeled reactor steady-state optimization under variable heat prices; limited balance residuals to \textbf{$8.6\!\times\!10^{-8}$}.}
+\cvprojectpoint{Predicted nonconvex blending-pool flows and quality; achieved \textbf{100\%} projection convergence at \textbf{$10^{-6}$} tolerance.}
+\cvprojectpoint{Predicted syngas process outputs; reduced MSE \textbf{10\%} versus raw predictions, with balance residuals \textbf{$<4\!\times\!10^{-15}$}.}
+\end{itemize}}
+\cvcompactentry{DAE-HardNet: Differential--Algebraic Learning with Hard Physics Constraints}{}{\begin{itemize}[label=\textbullet,leftmargin=1.1em]
+\cvprojectpoint{Developed \href{https://www.sciencedirect.com/science/article/pii/S0098135426003339}{DAE-HardNet} for DAE-governed dynamics using Taylor discretization and differentiable projections.}
+\cvprojectpoint{Modeled stirred-tank dynamics for economic MPC: \textbf{11.4\%} more output versus tracking, with heat/quality trade-offs.}
+\cvprojectpoint{Modeled LFP battery voltage: \textbf{30-min} RMSE fell \textbf{53--60\%} versus load-adjusted persistence with known current.}
+\cvprojectpoint{Estimated battery states with a causal EKF; half-cycle voltage RMSE fell \textbf{35\%}, from \textbf{29.4} to \textbf{19.1 mV}.}
+\cvprojectpoint{Adapted reactor MPC to changing demand; cut production shortfall \textbf{89\%}, with higher heating and quality excursions.}
+\end{itemize}}
+\cvcompactentry{Catalyst Screening: Interpretable Machine Learning for Water-Gas Shift Reactions}{}{\begin{itemize}[label=\textbullet,leftmargin=1.1em]
+\cvprojectpoint{Modeled water-gas shift CO conversion with \href{https://github.com/ShramanPal/Catalytic-ML-Screener}{LightGBM}, using Bayesian tuning and K-fold cross-validation.}
+\cvprojectpoint{Used model predictions to screen catalyst compositions in silico; applied SHAP to explain conversion drivers.}
+\cvprojectpoint{Achieved \textbf{2.3\% RMSE} for CO conversion; optimized the input space to identify promising catalyst compositions.}
+\end{itemize}}
+% \cvcompactentry{Bachelor's Thesis: Industrial Safety Analysis}{}{\begin{itemize}[label=\textbullet,leftmargin=1.1em]
+% \cvprojectpoint{Designed an unsupervised natural language processing (NLP) pipeline to analyze industrial hazards.}
+% \cvprojectpoint{Achieved \textbf{0.74 silhouette score} and \textbf{0.27 Davies--Bouldin index}; explained clusters with SHAP.}
+% \end{itemize}}
+% \cvcompactentry{Tata Consultancy Services, TRDDC}{}{\begin{itemize}[label=\textbullet,leftmargin=1.1em]
+% \cvprojectpoint{Trained \href{https://drive.google.com/file/d/1Y8-qanE1P0MJ7N9CnoQtqZXWNrXHgjez/view?usp=drive_link}{physics-informed DeepONet} models to predict heat-exchanger temperature profiles.}
+% \cvprojectpoint{Accelerated heat-exchanger inference approximately \textbf{$1{,}000\times$}; achieved \textbf{$10^{-4}$ MSE} in \textbf{200 epochs}.}
+% \end{itemize}}
+
+
+
+\cvsection{PUBLICATIONS}
+\par\Needspace{4\baselineskip}\vspace{0.10em}{\small\itshape\textcolor{cvsoft}{Journal Articles}}\par\vspace{0.16em}
+\begin{list}{}{\setlength{\leftmargin}{\cvcontentindent}\setlength{\labelwidth}{0pt}\setlength{\labelsep}{0pt}\setlength{\itemsep}{0.25em}\setlength{\parsep}{0pt}\setlength{\topsep}{0.05em}}\small
+\item \textbf{Golder, R.}, Roy, B. N., and Hasan, M. M. F. \href{https://www.sciencedirect.com/science/article/pii/S0098135426003339}{DAE-HardNet: A physics informed neural network enforcing differential-algebraic hard constraints.} \textit{Computers \& Chemical Engineering}, article 109881 (2026).
+\item Roy, B. N., \textbf{Golder, R.}, and Hasan, M. M. \href{https://arxiv.org/abs/2605.00260}{NLPOpt-Net: A Learning Method for Nonlinear Optimization with Feasibility Guarantees.} \textit{arXiv preprint}, arXiv:2605.00260 (2026).
+\item Iftakher, A., \textbf{Golder, R.}, Roy, B. N., and Hasan, M. M. F. \href{https://www.sciencedirect.com/science/article/pii/S0098135425004211}{Physics-informed neural networks with hard nonlinear equality and inequality constraints.} \textit{Computers \& Chemical Engineering}, article 109418 (2025).
+\item \textbf{Golder, R.}, and Hasan, M. M. \href{https://arxiv.org/abs/2507.21841}{Discovering Interpretable Ordinary Differential Equations from Noisy Data.} \textit{arXiv preprint}, arXiv:2507.21841 (2025).
+\item \textbf{Golder, R.}, Pal, S., and Ray, K. \href{https://www.sciencedirect.com/science/article/pii/S2772508124000279}{Machine learning-enhanced optimal catalyst selection for water-gas shift reaction.} \textit{Digital Chemical Engineering}, \textbf{12}, 100165 (2024).
+\item Bag, S., \textbf{Golder, R.}, Sarkar, S., and Maity, S. \href{https://doi.org/10.1016/j.engappai.2023.106332}{SENE: A novel manifold learning approach for distracted driving analysis with spatio-temporal and driver praxeological features.} \textit{Engineering Applications of Artificial Intelligence}, \textbf{123}, 106332 (2023).
+\end{list}
+\par\Needspace{4\baselineskip}\vspace{0.10em}{\small\itshape\textcolor{cvsoft}{Conference Proceedings}}\par\vspace{0.16em}
+\begin{list}{}{\setlength{\leftmargin}{\cvcontentindent}\setlength{\labelwidth}{0pt}\setlength{\labelsep}{0pt}\setlength{\itemsep}{0.25em}\setlength{\parsep}{0pt}\setlength{\topsep}{0.05em}}\small
+\item Roy, B. N., \textbf{Golder, R.}, and Hasan, M. M. F. \href{https://aiche.confex.com/aiche/2026/prelim.cgi/Paper/734563}{Thermodynamically Constrained Machine Learning for Gas Adsorption on Zeolites.} \textit{2026 AIChE Annual Meeting}, November 10, 2026. \textit{Upcoming}.
+\item Roy, B. N., \textbf{Golder, R.}, and Hasan, M. M. F. \href{https://aiche.confex.com/aiche/2026/meetingapp.cgi/Paper/738715}{Physics Constrained Machine Learning for Safety-Aware Process Control.} \textit{2026 AIChE Annual Meeting}, November 10, 2026. \textit{Upcoming}.
+\item Roy, B. N., \textbf{Golder, R.}, and Hasan, M. M. F. \href{https://aiche.confex.com/aiche/2026/meetingapp.cgi/Paper/734536}{Learning Nonlinear Parametric Optimization with Constraint Satisfaction Guarantees.} \textit{2026 AIChE Annual Meeting}, November 8, 2026. \textit{Upcoming}.
+\item \textbf{Golder, R.}, Roy, B. N., and Hasan, M. M. F. \href{https://aiche.confex.com/aiche/2026/prelim.cgi/Paper/736408}{A Physics Constrained Machine Learning (PCML) Framework for Hybrid Modeling, Simulation, and Optimization of Chemical Processes.} \textit{2026 AIChE Annual Meeting}, November 8, 2026. \textit{Upcoming}.
+\item \textbf{Golder, R.} (presenter). ``Embedding Thermodynamics in Graph Neural Networks for Gas Adsorption Prediction of Nanoporous Materials.'' \textit{10th Annual Texas A\&M Conference on Energy}. Oral presentation, Data Science and Statistical Learning in Energy Applications session. \textbf{Best Presentation Award}.
+\item Karkaria, P., \textbf{Golder, R.}, and Sarkar, S. \href{https://ieeexplore.ieee.org/abstract/document/10041616/}{Implementation of a priority queue to optimize resources during manual verification of fake news.} In \textit{2022 International Conference on Data Analytics for Business and Industry (ICDABI)}, pp.\ 1--5. IEEE (2022).
+\item Singh, A. K., \textbf{Golder, R.}, and Sarkar, S. \href{https://ieeexplore.ieee.org/abstract/document/10041699/}{Unsupervised and categorical sentiment segmentation of customer product reviews.} In \textit{2022 International Conference on Data Analytics for Business and Industry (ICDABI)}, pp.\ 624--628. IEEE (2022).
+\end{list}
+
+\cvsection{TECHNICAL SKILLS}
+\begin{cvbodyblock}\small
+\textbf{Programming and Tools:} Python, JAX, NumPy, SciPy, SQL, MATLAB, C++, Git.\par
+\cvskillline{\textbf{Machine Learning:} PINNs, neural operators, LightGBM, Bayesian optimization, clustering, SHAP.}
+\end{cvbodyblock}
+
+\cvsection{TEACHING EXPERIENCE}
+\begin{itemize}[label=\textbullet,leftmargin=1.1em,itemsep=0.35em,topsep=0.15em,parsep=0pt]\small
+
+\cvtwolinepoint{\textbf{CHEN 461: Process Dynamics and Control, Texas A\&M University:} TA for \textbf{140+ students}.}
+{Graded coursework, invigilated exams, and led recitations on process dynamics and automatic control systems.}
+\cvtwolinepoint{\textbf{CHEN 322: Chemical Engineering Materials, Texas A\&M University:} TA for \textbf{60 students}.}
+{Supported instruction on materials science and classes of materials relevant to chemical engineering applications.}
+\cvtwolinepoint{\textbf{Fluid Flow Laboratory, IIT Kharagpur:} Guided students through fluidized- and packed-bed experiments.}
+{Explained the Ergun equation and graded weekly laboratory reports on experimental results and interpretation.}
+\cvtwolinepoint{\textbf{Mechanical Operations Laboratory, IIT Kharagpur:} Led small-ball-mill experiments for student groups.}
+{Addressed student questions on experimental results and graded calculations, analysis, and technical reports.}
+\end{itemize}
+
+\cvsection{AWARDS AND RECOGNITIONS}
+\begin{cvbodyblock}\small
+\textbf{Qualifying Exam Excellence Award, Department of Chemical Engineering, Texas A\&M University:} Selected by the Ph.D. qualifying exam committee for a strong grasp of chemical engineering fundamentals and excellent analytical skills.\par\vspace{0.18em}
+\textbf{Best Presentation Award, 10th Annual Texas A\&M Conference on Energy:} Recognized for the oral presentation ``Embedding Thermodynamics in Graph Neural Networks for Gas Adsorption Prediction of Nanoporous Materials'' in the Data Science and Statistical Learning in Energy Applications session.\par\vspace{0.18em}
+
+\textbf{Bronze Medal, NSS Annual Camp (2019):} Recognized for performance as a member of Unit 1, IIT Kharagpur.\par\vspace{0.18em}
+% \textbf{Certifications:}
+% \href{https://drive.google.com/file/d/12TY6uz-xFvV7RvEexgy5hVSwAuVb02Ul/view?usp=sharing}{Google Data Analytics Professional Certificate};
+% \href{https://drive.google.com/file/d/12XoyUNYpRu9nNKtFgsxzF4jZHUOWZw7V/view?usp=sharing}{Deep Learning Specialization};
+% \href{https://drive.google.com/file/d/1USS2Gd1lVnGdtn1NNj207MB3HAbuyYfj/view?usp=sharing}{TensorFlow Advanced Techniques Specialization};
+% \href{https://www.kaggle.com/rahulgolder}{Generative Adversarial Network Specialization}.
+\end{cvbodyblock}
+
+\cvsection{POSITIONS OF RESPONSIBILITY}
+\begin{itemize}[label=\textbullet,leftmargin=1.1em,itemsep=0.35em,topsep=0.15em,parsep=0pt]\small
+
+\cvtwolinepoint{\textbf{Internal Outreach Officer, \href{https://www.tamuers.com/}{TAMU Energy Research Society}:} Organized the \href{https://www.tamuers.com/coe2025}{9th Annual Conference on Energy}.}
+{Raised \textbf{\$9,000+} from TAMU/external sponsors; hosted \textbf{40+} trivia participants; volunteered in \href{https://bigevent.tamu.edu/}{The Big Event}.}
+\cvtwolinepoint{\textbf{Child Rights \& You, IIT Kharagpur:} Led \textbf{35 volunteers} in a survey investigating barriers to school attendance.}
+{Taught fourth-grade students in village schools and surveyed child labor in shops and food stalls near campus.}
+\cvtwolinepoint{\textbf{National Service Scheme, IIT Kharagpur:} Delivered hygiene and COVID-19 awareness at schools and hospitals.}
+{Contributed to improvements in village drainage during the week-long NSS Annual Camp near IIT Kharagpur.}
+\end{itemize}
+
+\end{document}
+
+
