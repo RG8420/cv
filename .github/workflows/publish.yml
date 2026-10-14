@@ -13,12 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+      - name: Install Tectonic
+        run: |
+          curl --fail --location --retry 3 https://github.com/tectonic-typesetting/tectonic/releases/download/tectonic%400.17.0/tectonic-0.17.0-x86_64-unknown-linux-gnu.tar.gz --output /tmp/tectonic.tar.gz
+          tar -xzf /tmp/tectonic.tar.gz -C /tmp
+          sudo install /tmp/tectonic /usr/local/bin/tectonic
       - name: Compile CV
-        uses: xu-cheng/latex-action@v4
-        with:
-          root_file: Rahul_Golder_CV.tex
-          latexmk_use_xelatex: true
-          texlive_version: 2022
+        run: tectonic --keep-logs Rahul_Golder_CV.tex
       - name: Assemble site
         run: |
           mkdir -p _site
