@@ -109,6 +109,12 @@
 \cvprojectpoint{Estimated battery states with a causal EKF; half-cycle voltage RMSE fell \textbf{35\%}, from \textbf{29.4} to \textbf{19.1 mV}.}
 \cvprojectpoint{Adapted reactor MPC to changing demand; cut production shortfall \textbf{89\%}, with higher heating and quality excursions.}
 \end{itemize}}
+\cvcompactentry{NLPOpt-Net: Parametric Nonlinear Optimization with Differentiable Projection}{}{\begin{itemize}[label=\textbullet,leftmargin=1.1em]
+\cvprojectpoint{Developed \href{https://github.com/SOULS-TAMU/nlpoptnet}{NLPOpt-Net}, an unsupervised optimizer with multilayer quadratic projections and implicit gradients.}
+\cvprojectpoint{Learned QP, QCQP, and nonlinear solution maps for \textbf{100 variables}, with \textbf{50 equality} and \textbf{50 inequality} constraints.}
+\cvprojectpoint{Solved parametric QPs with \textbf{0.081\%} mean optimality gap across \textbf{2,000} instances using the \href{https://arxiv.org/abs/2605.00260}{learned solution map}.}
+\cvprojectpoint{Compiled QP projections to C; cut mean inference from \textbf{95.14 to 2.06 ms}, approximately \textbf{$46\times$} faster than JAX.}
+\end{itemize}}
 \cvcompactentry{Catalyst Screening: Interpretable Machine Learning for Water-Gas Shift Reactions}{}{\begin{itemize}[label=\textbullet,leftmargin=1.1em]
 \cvprojectpoint{Modeled water-gas shift CO conversion with \href{https://github.com/ShramanPal/Catalytic-ML-Screener}{LightGBM}, using Bayesian tuning and K-fold cross-validation.}
 \cvprojectpoint{Used model predictions to screen catalyst compositions in silico; applied SHAP to explain conversion drivers.}
